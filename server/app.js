@@ -4,6 +4,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
+
 // puts post request body data and store it on req.body
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -13,19 +14,38 @@ app.set('port', process.env.PORT || 3000);
 var songs = [
   {
     artist: "Bruce Springstein",
-    title: "Born in the U.S.A."
+    title: "Born in the U.S.A.",
   }
 ];
 
 // Routes
 app.post('/songs', function(req, res) {
   // req.body is supplied by bodyParser above
+  var duplicatedCount = 0;
   console.log("REQ body: ", req.body);
   var newSong = req.body;
-  songs.push(newSong);
+  if (newSong.title === "") {
+    res.sendStatus(400);
+  }
+  for (var i = 0; i < songs.length; i++) {
+    console.log(songs[i]);
+    console.log('new song ', newSong);
+    if (songs[i].title == newSong.title) {
+      duplicatedCount++;
+    }
+  }
+  if (duplicatedCount > 0) {
+    console.log("Already added!");
+    res.sendStatus(400);
+  } else {
+    songs.push(newSong);
+    res.sendStatus(201);
+  }
+
+
 
   // created new resource
-  res.sendStatus(201);
+
 });
 
 app.get('/songs', function(req, res) {
