@@ -48,7 +48,7 @@ $(document).ready(function() {
       var $el = $("#songContainer").children().last();
       $el.append('<h3>' + songs[i].title + '</h3>');
       $el.append('<p>By: ' + songs[i].artist + '</p>');
-      $el.append('<p>Date Added:' + currentDate + '</p>');
+      $el.append('<p>Date Added:' + currentDate.toLocaleString() + '</p>');
     }
 
   }
