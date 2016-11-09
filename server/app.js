@@ -5,6 +5,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 
+
 // puts post request body data and store it on req.body
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -15,6 +16,7 @@ var songs = [
   {
     artist: "Bruce Springstein",
     title: "Born in the U.S.A.",
+    dateAdded: new Date()
   }
 ];
 
@@ -28,8 +30,6 @@ app.post('/songs', function(req, res) {
     res.sendStatus(400);
   }
   for (var i = 0; i < songs.length; i++) {
-    console.log(songs[i]);
-    console.log('new song ', newSong);
     if (songs[i].title == newSong.title) {
       duplicatedCount++;
     }
@@ -38,7 +38,10 @@ app.post('/songs', function(req, res) {
     console.log("Already added!");
     res.sendStatus(400);
   } else {
+    var currentDate = new Date();
+    newSong.dateAdded = currentDate;
     songs.push(newSong);
+    console.log(songs);
     res.sendStatus(201);
   }
 
