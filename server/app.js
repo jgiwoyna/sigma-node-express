@@ -16,7 +16,7 @@ var songs = [
   {
     artist: "Bruce Springstein",
     title: "Born in the U.S.A.",
-    dateAdded: new Date()
+    dateAdded: new Date().toLocaleDateString()
   }
 ];
 
@@ -39,7 +39,7 @@ app.post('/songs', function(req, res) {
     res.sendStatus(400);
   } else {
     var currentDate = new Date();
-    newSong.dateAdded = currentDate;
+    newSong.dateAdded = currentDate.toLocaleDateString();
     songs.push(newSong);
     console.log(songs);
     res.sendStatus(201);

@@ -46,7 +46,7 @@ $(document).ready(function() {
       var $el = $("#songContainer").children().last();
       $el.append('<h3>Title: ' + songs[i].title + '</h3>');
       $el.append('<p>By: ' + songs[i].artist + '</p>');
-      $el.append('<p>Date Added: ' + songs[i].dateAdded.toLocaleString() + '</p>');
+      $el.append('<p>Date Added: ' + songs[i].dateAdded + '</p>');
       console.log(songs);
     }
 
